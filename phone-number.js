@@ -18,23 +18,7 @@ export const clean = input => {
       throw new Error('11 digits must start with 1')
     }
 
-    if (digits[1] === '0') {
-      throw new Error('Area code cannot start with zero')
-    }
-
-    if (digits[1] === '1') {
-      throw new Error('Area code cannot start with one')
-    }
-
-    if (digits[4] === '0') {
-      throw new Error('Exchange code cannot start with zero')
-    }
-
-    if (digits[4] === '1') {
-      throw new Error('Exchange code cannot start with one')
-    }
-
-    delete digits[0]
+    digits.shift()
   }
 
   if (digits.length > 11) {
