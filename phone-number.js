@@ -1,18 +1,24 @@
 export const clean = input => {
-  checkInvalidCharacters(input)
+  if (input.match(/[@:!]/)) {
+    throw new Error('Punctuations not permitted')
+  }
+
+  if (input.match(/[a-zA-Z]/)) {
+    throw new Error('Letters not permitted')
+  }
 
   const digits = input.match(/\d/g)
+
+  if (digits.length === 11 && digits[0] === '1') {
+    digits.shift()
+  }
 
   if (digits.length < 10) {
     throw new Error('Incorrect number of digits')
   }
 
   if (digits.length === 11) {
-    if (digits[0] !== '1') {
-      throw new Error('11 digits must start with 1')
-    }
-
-    digits.shift()
+    throw new Error('11 digits must start with 1')
   }
 
   if (digits.length > 11) {
@@ -37,13 +43,3 @@ export const clean = input => {
 
   return digits.join('')
 };
-
-const checkInvalidCharacters = input => {
-  if (input.match(/[@:!]/)) {
-    throw new Error('Punctuations not permitted')
-  }
-
-  if (input.match(/[a-zA-Z]/)) {
-    throw new Error('Letters not permitted')
-  }
-}
