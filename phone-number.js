@@ -1,11 +1,5 @@
 export const clean = input => {
-  if (input.match(/[@:!]/)) {
-    throw new Error('Punctuations not permitted')
-  }
-
-  if (input.match(/[a-zA-Z]/)) {
-    throw new Error('Letters not permitted')
-  }
+  checkInvalidCharacters(input)
 
   const digits = input.match(/\d/g)
 
@@ -43,3 +37,13 @@ export const clean = input => {
 
   return digits.join('')
 };
+
+const checkInvalidCharacters = input => {
+  if (input.match(/[@:!]/)) {
+    throw new Error('Punctuations not permitted')
+  }
+
+  if (input.match(/[a-zA-Z]/)) {
+    throw new Error('Letters not permitted')
+  }
+}
